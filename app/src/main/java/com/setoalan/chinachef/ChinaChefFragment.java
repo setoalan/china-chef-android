@@ -8,6 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 public class ChinaChefFragment extends Fragment {
 
     private int quantity = 0;
@@ -20,6 +27,12 @@ public class ChinaChefFragment extends Fragment {
     private TextView mDescriptionTextView;
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        importJSONAppetizer();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_china_chef, container, false);
 
@@ -29,7 +42,7 @@ public class ChinaChefFragment extends Fragment {
         mPriceTextView = (TextView) view.findViewById(R.id.appetizer_price_text_view);
         mPriceTextView.setText("$9.99");
 
-        mDecreaseButton = (Button) view.findViewById(R.id.decrease_quantity_button);
+        mDecreaseButton = (Button) view.findViewById(R.id.decrease_button);
         mDecreaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +53,7 @@ public class ChinaChefFragment extends Fragment {
         mQuantityTextView = (TextView) view.findViewById(R.id.quantity_text_view);
         mQuantityTextView.setText(String.valueOf(quantity));
 
-        mIncreaseTextView = (Button) view.findViewById(R.id.increase_quantity_button);
+        mIncreaseTextView = (Button) view.findViewById(R.id.increase_button);
         mIncreaseTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +65,21 @@ public class ChinaChefFragment extends Fragment {
         mDescriptionTextView.setText("Description of the appetizer");
 
         return view;
+    }
+
+    private void importJSONAppetizer() {
+        try {
+            InputStream inputStream = getActivity().getAssets().open("appetizers.json");
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            inputStream.close();
+            String jsonMenu = new String(buffer, "UTF-8");
+
+            JSONArray jsonArray = new JSONObject(jsonMenu).getJSONArray("appetizers");
+            Menu.get(getActivity()).setAppetizers(jsonArray);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -4,13 +4,14 @@ public class Appetizer {
 
     private int mId;
     private String mName;
-    private int mQuantity;
+    private String mDescription;
     private double mPrice;
     private boolean mSpicy;
 
-    public void Appetizer(int id, String name, double price, boolean spicy) {
+    public Appetizer(int id, String name, String description, double price, boolean spicy) {
         mId = id;
         mName = name;
+        mDescription = description;
         mPrice = price;
         mSpicy = spicy;
     }
@@ -31,12 +32,12 @@ public class Appetizer {
         mName = name;
     }
 
-    public int getQuantity() {
-        return mQuantity;
+    public String getDescription() {
+        return mDescription;
     }
 
-    public void setQuantity(int quantity) {
-        mQuantity = quantity;
+    public void setDescription(String description) {
+        mDescription = description;
     }
 
     public double getPrice() {

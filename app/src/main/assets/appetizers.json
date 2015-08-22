@@ -1,0 +1,60 @@
+{
+    "appetizers": [
+        {
+            "id": "0",
+            "name": "Egg Roll (1)",
+            "description": "",
+            "price": 1,
+            "spicy": false
+        },
+        {
+            "id": "1",
+            "name": "Vegetable Egg Roll (1)",
+            "description": "",
+            "price": 1.25,
+            "spicy": false
+        },
+        {
+            "id": "2",
+            "name": "Fried Wonton (10)",
+            "description": "",
+            "price": 2.95,
+            "spicy": false
+        },
+        {
+            "id": "3",
+            "name": "Donut Bread (10)",
+            "description": "",
+            "price": 3.95,
+            "spicy": false
+        },
+        {
+            "id": "4",
+            "name": "Crab Rangoon (6)",
+            "description": "",
+            "price": 4.50,
+            "spicy": false
+        },
+        {
+            "id": "5",
+            "name": "Fantail Shrimp",
+            "description": "",
+            "price": 4.50,
+            "spicy": false
+        },
+        {
+            "id": "6",
+            "name": "Steam/Fried Dumplings (8)",
+            "description": "",
+            "price": 4.50,
+            "spicy": false
+        },
+        {
+            "id": "7",
+            "name": "Chicken Teriyaki (4)",
+            "description": "",
+            "price": 4.50,
+            "spicy": false
+        }
+    ]
+}
