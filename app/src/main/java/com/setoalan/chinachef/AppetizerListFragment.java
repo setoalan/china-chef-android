@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +16,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class AppetizerListFragment extends Fragment {
@@ -49,14 +51,30 @@ public class AppetizerListFragment extends Fragment {
         mAppetizerRecyclerView.setAdapter(mAdapter);
     }
 
-    private class AppetizerHolder extends RecyclerView.ViewHolder {
+    private class AppetizerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView mNameTextView;
+        private Appetizer mAppetizer;
+
+        private TextView mNameTextView;
+        private TextView mPriceTextView;
 
         public AppetizerHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
 
-            mNameTextView = (TextView) itemView;
+            mNameTextView = (TextView) itemView.findViewById(R.id.list_item_appetizer_name_text_view);
+            mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_appetizer_price_text_view);
+        }
+
+        public void bindCrime(Appetizer appetizer) {
+            mAppetizer = appetizer;
+            mNameTextView.setText(mAppetizer.getName());
+            mPriceTextView.setText(NumberFormat.getCurrencyInstance().format(mAppetizer.getPrice()));
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getActivity(), mAppetizer.getName(), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -72,14 +90,14 @@ public class AppetizerListFragment extends Fragment {
         @Override
         public AppetizerHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(android.R.layout.simple_list_item_1, viewGroup, false);
+            View view = layoutInflater.inflate(R.layout.list_item_appetizer, viewGroup, false);
             return new AppetizerHolder(view);
         }
 
         @Override
         public void onBindViewHolder(AppetizerHolder appetizerHolder, int position) {
             Appetizer appetizer = mAppetizers.get(position);
-            appetizerHolder.mNameTextView.setText(appetizer.getName());
+            appetizerHolder.bindCrime(appetizer);
         }
 
         @Override
