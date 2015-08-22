@@ -48,4 +48,12 @@ public class Menu {
         }
     }
 
+    public Appetizer getAppetizer(int appetizerId) {
+        for (Appetizer appetizer : mAppetizers) {
+            if (appetizer.getId() == appetizerId)
+                return appetizer;
+        }
+        return null;
+    }
+
 }
