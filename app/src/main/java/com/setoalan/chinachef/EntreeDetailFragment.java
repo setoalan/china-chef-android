@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 
-public class ChinaChefFragment extends Fragment {
+public class EntreeDetailFragment extends Fragment {
 
-    public static final String ARG_APPETIZER_ID = "appetizer_id";
+    public static final String ARG_ENTREE_ID = "entree_id";
 
-    private Appetizer mAppetizer;
+    private Entree mEntree;
     private int quantity = 0;
 
     private TextView mNameTextView;
@@ -24,11 +24,11 @@ public class ChinaChefFragment extends Fragment {
     private Button mIncreaseTextView;
     private TextView mDescriptionTextView;
 
-    public static ChinaChefFragment newInstance(int appetizerId) {
+    public static EntreeDetailFragment newInstance(int entreeId) {
         Bundle args = new Bundle();
-        args.putInt(ARG_APPETIZER_ID, appetizerId);
+        args.putInt(ARG_ENTREE_ID, entreeId);
 
-        ChinaChefFragment fragment = new ChinaChefFragment();
+        EntreeDetailFragment fragment = new EntreeDetailFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,20 +36,20 @@ public class ChinaChefFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int appetizerId = getArguments().getInt(ARG_APPETIZER_ID);
+        int entreeId = getArguments().getInt(ARG_ENTREE_ID);
 
-        mAppetizer = Menu.get(getActivity()).getAppetizer(appetizerId);
+        mEntree = Menu.get(getActivity()).getEntree(entreeId);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_china_chef, container, false);
+        View view = inflater.inflate(R.layout.fragment_entree_detail, container, false);
 
-        mNameTextView = (TextView) view.findViewById(R.id.appetizer_name_text_view);
-        mNameTextView.setText(mAppetizer.getName());
+        mNameTextView = (TextView) view.findViewById(R.id.entree_name_text_view);
+        mNameTextView.setText(mEntree.getName());
 
-        mPriceTextView = (TextView) view.findViewById(R.id.appetizer_price_text_view);
-        mPriceTextView.setText(NumberFormat.getCurrencyInstance().format(mAppetizer.getPrice()));
+        mPriceTextView = (TextView) view.findViewById(R.id.entree_price_text_view);
+        mPriceTextView.setText(NumberFormat.getCurrencyInstance().format(mEntree.getPrice()));
 
         mDecreaseButton = (Button) view.findViewById(R.id.decrease_button);
         mDecreaseButton.setOnClickListener(new View.OnClickListener() {
@@ -70,8 +70,8 @@ public class ChinaChefFragment extends Fragment {
             }
         });
 
-        mDescriptionTextView = (TextView) view.findViewById(R.id.appetizer_description_text_view);
-        mDescriptionTextView.setText(mAppetizer.getDescription());
+        mDescriptionTextView = (TextView) view.findViewById(R.id.entree_description_text_view);
+        mDescriptionTextView.setText(mEntree.getDescription());
 
         return view;
     }

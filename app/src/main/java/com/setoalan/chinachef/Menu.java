@@ -13,7 +13,7 @@ public class Menu {
 
     private static Menu sMenu;
 
-    private List<Appetizer> mAppetizers;
+    private List<Entree> mEntrees;
 
     public static Menu get(Context context) {
         if (sMenu == null) {
@@ -23,20 +23,20 @@ public class Menu {
     }
 
     private Menu(Context context) {
-        mAppetizers = new ArrayList<>();
+        mEntrees = new ArrayList<>();
     }
 
-    public List<Appetizer> getAppetizers() {
-        return mAppetizers;
+    public List<Entree> getEntrees() {
+        return mEntrees;
     }
 
-    public void setAppetizers(JSONArray appetizers) {
+    public void setEntrees(JSONArray entrees) {
         try {
             JSONObject jsonObject;
-            int size = appetizers.length();
+            int size = entrees.length();
             for (int i = 0; i < size; i++) {
-                jsonObject = appetizers.getJSONObject(i);
-                mAppetizers.add(new Appetizer(
+                jsonObject = entrees.getJSONObject(i);
+                mEntrees.add(new Entree(
                         jsonObject.getInt("id"),
                         jsonObject.getString("name"),
                         jsonObject.getString("description"),
@@ -48,10 +48,10 @@ public class Menu {
         }
     }
 
-    public Appetizer getAppetizer(int appetizerId) {
-        for (Appetizer appetizer : mAppetizers) {
-            if (appetizer.getId() == appetizerId)
-                return appetizer;
+    public Entree getEntree(int entreeId) {
+        for (Entree entree : mEntrees) {
+            if (entree.getId() == entreeId)
+                return entree;
         }
         return null;
     }

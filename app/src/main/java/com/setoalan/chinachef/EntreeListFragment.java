@@ -19,11 +19,11 @@ import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.List;
 
-public class AppetizerListFragment extends Fragment {
+public class EntreeListFragment extends Fragment {
 
-    private AppetizerAdapter mAdapter;
+    private EntreeAdapter mAdapter;
 
-    private RecyclerView mAppetizerRecyclerView;
+    private RecyclerView mEntreeRecyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,10 @@ public class AppetizerListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_appetizer_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_entree_list, container, false);
 
-        mAppetizerRecyclerView = (RecyclerView) view.findViewById(R.id.appetizer_recycler_view);
-        mAppetizerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mEntreeRecyclerView = (RecyclerView) view.findViewById(R.id.entree_recycler_view);
+        mEntreeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
 
@@ -51,67 +51,67 @@ public class AppetizerListFragment extends Fragment {
 
     private void updateUI() {
         Menu menu = Menu.get(getActivity());
-        List<Appetizer> appetizers = menu.getAppetizers();
+        List<Entree> entrees = menu.getEntrees();
 
         if (mAdapter == null) {
-            mAdapter = new AppetizerAdapter(appetizers);
-            mAppetizerRecyclerView.setAdapter(mAdapter);
+            mAdapter = new EntreeAdapter(entrees);
+            mEntreeRecyclerView.setAdapter(mAdapter);
         }
     }
 
-    private class AppetizerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class EntreeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private Appetizer mAppetizer;
+        private Entree mEntree;
 
         private TextView mNameTextView;
         private TextView mPriceTextView;
 
-        public AppetizerHolder(View itemView) {
+        public EntreeHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mNameTextView = (TextView) itemView.findViewById(R.id.list_item_appetizer_name_text_view);
-            mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_appetizer_price_text_view);
+            mNameTextView = (TextView) itemView.findViewById(R.id.list_item_entree_name_text_view);
+            mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_entree_price_text_view);
         }
 
-        public void bindCrime(Appetizer appetizer) {
-            mAppetizer = appetizer;
-            mNameTextView.setText(mAppetizer.getName());
-            mPriceTextView.setText(NumberFormat.getCurrencyInstance().format(mAppetizer.getPrice()));
+        public void bindCrime(Entree entree) {
+            mEntree = entree;
+            mNameTextView.setText(mEntree.getName());
+            mPriceTextView.setText(NumberFormat.getCurrencyInstance().format(mEntree.getPrice()));
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = AppetizerPagerActivity.newIntent(getActivity(), mAppetizer.getId());
+            Intent intent = EntreePagerActivity.newIntent(getActivity(), mEntree.getId());
             startActivity(intent);
         }
 
     }
 
-    private class AppetizerAdapter extends RecyclerView.Adapter<AppetizerHolder> {
+    private class EntreeAdapter extends RecyclerView.Adapter<EntreeHolder> {
 
-        private List<Appetizer> mAppetizers;
+        private List<Entree> mEntrees;
 
-        public AppetizerAdapter(List<Appetizer> appetizers) {
-            mAppetizers = appetizers;
+        public EntreeAdapter(List<Entree> entrees) {
+            mEntrees = entrees;
         }
 
         @Override
-        public AppetizerHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+        public EntreeHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item_appetizer, viewGroup, false);
-            return new AppetizerHolder(view);
+            View view = layoutInflater.inflate(R.layout.list_item_entree, viewGroup, false);
+            return new EntreeHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(AppetizerHolder appetizerHolder, int position) {
-            Appetizer appetizer = mAppetizers.get(position);
-            appetizerHolder.bindCrime(appetizer);
+        public void onBindViewHolder(EntreeHolder entreeHolder, int position) {
+            Entree entree = mEntrees.get(position);
+            entreeHolder.bindCrime(entree);
         }
 
         @Override
         public int getItemCount() {
-            return mAppetizers.size();
+            return mEntrees.size();
         }
 
     }
@@ -125,7 +125,7 @@ public class AppetizerListFragment extends Fragment {
             String jsonMenu = new String(buffer, "UTF-8");
 
             JSONArray jsonArray = new JSONObject(jsonMenu).getJSONArray("appetizers");
-            Menu.get(getActivity()).setAppetizers(jsonArray);
+            Menu.get(getActivity()).setEntrees(jsonArray);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }

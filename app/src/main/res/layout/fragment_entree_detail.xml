@@ -12,7 +12,7 @@
         android:paddingBottom="8dp">
 
         <TextView
-            android:id="@+id/appetizer_name_text_view"
+            android:id="@+id/entree_name_text_view"
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             tools:text="Appetizer" />
 
         <TextView
-            android:id="@+id/appetizer_price_text_view"
+            android:id="@+id/entree_price_text_view"
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/appetizer_description_text_view"
+        android:id="@+id/entree_description_text_view"
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

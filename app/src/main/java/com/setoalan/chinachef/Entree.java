@@ -1,6 +1,6 @@
 package com.setoalan.chinachef;
 
-public class Appetizer {
+public class Entree {
 
     private int mId;
     private String mName;
@@ -8,7 +8,7 @@ public class Appetizer {
     private double mPrice;
     private boolean mSpicy;
 
-    public Appetizer(int id, String name, String description, double price, boolean spicy) {
+    public Entree(int id, String name, String description, double price, boolean spicy) {
         mId = id;
         mName = name;
         mDescription = description;
