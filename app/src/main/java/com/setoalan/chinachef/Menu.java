@@ -56,4 +56,8 @@ public class Menu {
         return null;
     }
 
+    public void destroyMenu() {
+        sMenu = null;
+    }
+
 }

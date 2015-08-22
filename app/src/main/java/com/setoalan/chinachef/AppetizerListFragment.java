@@ -43,12 +43,20 @@ public class AppetizerListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Menu.get(getActivity()).destroyMenu();
+    }
+
     private void updateUI() {
         Menu menu = Menu.get(getActivity());
         List<Appetizer> appetizers = menu.getAppetizers();
 
-        mAdapter = new AppetizerAdapter(appetizers);
-        mAppetizerRecyclerView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new AppetizerAdapter(appetizers);
+            mAppetizerRecyclerView.setAdapter(mAdapter);
+        }
     }
 
     private class AppetizerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -74,7 +82,7 @@ public class AppetizerListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = ChinaChefActivity.newIntent(getActivity(), mAppetizer.getId());
+            Intent intent = AppetizerPagerActivity.newIntent(getActivity(), mAppetizer.getId());
             startActivity(intent);
         }
 
