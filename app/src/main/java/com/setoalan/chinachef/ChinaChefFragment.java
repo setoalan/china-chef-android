@@ -8,13 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-
 public class ChinaChefFragment extends Fragment {
 
     private int quantity = 0;
@@ -25,12 +18,6 @@ public class ChinaChefFragment extends Fragment {
     private TextView mQuantityTextView;
     private Button mIncreaseTextView;
     private TextView mDescriptionTextView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        importJSONAppetizer();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,21 +52,6 @@ public class ChinaChefFragment extends Fragment {
         mDescriptionTextView.setText("Description of the appetizer");
 
         return view;
-    }
-
-    private void importJSONAppetizer() {
-        try {
-            InputStream inputStream = getActivity().getAssets().open("appetizers.json");
-            byte[] buffer = new byte[inputStream.available()];
-            inputStream.read(buffer);
-            inputStream.close();
-            String jsonMenu = new String(buffer, "UTF-8");
-
-            JSONArray jsonArray = new JSONObject(jsonMenu).getJSONArray("appetizers");
-            Menu.get(getActivity()).setAppetizers(jsonArray);
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
     }
 
 }
