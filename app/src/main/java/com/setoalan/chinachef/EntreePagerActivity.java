@@ -4,14 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 
-public class EntreePagerActivity extends FragmentActivity {
+public class EntreePagerActivity extends AppCompatActivity {
 
     private static final String EXTRA_ENTREE_ID = "com.setoalan.chinachef.appetizer_id";
 
@@ -30,7 +30,9 @@ public class EntreePagerActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entree_pager);
 
-        int appetizerId = getIntent().getIntExtra(EXTRA_ENTREE_ID, 0);
+        int entreeId = getIntent().getIntExtra(EXTRA_ENTREE_ID, 0);
+
+        getSupportActionBar().setTitle(R.string.appetizers);
 
         mViewPager = (ViewPager) findViewById(R.id.activity_entree_pager_view_pager);
 
@@ -50,7 +52,7 @@ public class EntreePagerActivity extends FragmentActivity {
         });
 
         for (int i = 0; i < mEntrees.size(); i++) {
-            if (mEntrees.get(i).getId() == appetizerId) {
+            if (mEntrees.get(i).getId() == entreeId) {
                 mViewPager.setCurrentItem(i);
                 break;
             }

@@ -44,16 +44,58 @@
         },
         {
             "id": "6",
-            "name": "Steam/Fried Dumplings (8)",
+            "name": "Steam Dumplings (8)",
             "description": "",
             "price": 4.50,
             "spicy": false
         },
         {
             "id": "7",
+            "name": "Fried Dumplings (8)",
+            "description": "",
+            "price": 4.50,
+            "spicy": false
+        },
+        {
+            "id": "8",
             "name": "Chicken Teriyaki (4)",
             "description": "",
             "price": 4.50,
+            "spicy": false
+        },
+        {
+            "id": "9",
+            "name": "BBQ Pork",
+            "description": "",
+            "price": 5.50,
+            "spicy": false
+        },
+        {
+            "id": "10",
+            "name": "Beef Teriyaki (4)",
+            "description": "",
+            "price": 5.50,
+            "spicy": false
+        },
+        {
+            "id": "11",
+            "name": "Chicken Wings (4)",
+            "description": "",
+            "price": 5.50,
+            "spicy": false
+        },
+        {
+            "id": "12",
+            "name": "Lettuce Wrap (4)",
+            "description": "",
+            "price": 8.95,
+            "spicy": false
+        },
+        {
+            "id": "13",
+            "name": "Bo Bo Platter (For 2)",
+            "description": "Combination of egg roll, BBQ spare rib, fantail shrimp, fried chicken wing, crab rangoon, and fried beef stick.",
+            "price": 11.95,
             "spicy": false
         }
     ]
