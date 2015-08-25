@@ -1,28 +1,23 @@
 package com.setoalan.chinachef;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v4.view.GravityCompat;
+import android.view.MenuItem;
 import android.view.View;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
-    String mDrawerTitles[] = {"One", "Two", "Three", "Four", "Five"};
-
     private Toolbar mToolbar;
-
-    RecyclerView mRecyclerView;
-    RecyclerView.Adapter mAdapter;
-    RecyclerView.LayoutManager mLayoutManager;
-    DrawerLayout mDrawerLayout;
-
-    ActionBarDrawerToggle mActionBarDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     protected abstract Fragment createFragment();
 
@@ -31,33 +26,47 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
 
-        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.drawer_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new NavigationDrawerAdapter(mDrawerTitles);
-        mRecyclerView.setAdapter(mAdapter);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.plus, R.string.minus) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.plus, R.string.minus) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                // TODO
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                // TODO
             }
         };
+        mToolbar.setNavigationIcon(R.mipmap.ic_menu_white_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
 
-        mDrawerLayout.setDrawerListener(mActionBarDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mActionBarDrawerToggle.syncState();
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                switch (menuItem.getItemId()) {
+                    case R.id.navigation_item_1:
+                        return true;
+                    case R.id.navigation_item_2:
+                        return true;
+                    default:
+                        return true;
+                }
+            }
+        });
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);

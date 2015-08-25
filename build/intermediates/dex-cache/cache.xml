@@ -16,13 +16,6 @@
         <dex dex="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/pre-dexed/debug/classes-ec0bbab2a0737021e90ca3707eadbeb36ac3f25d.jar" />
     </item>
     <item
-        jar="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/pre-dexed/debug/classes-8e24203d540ba046fc58d37738d5559bab42fe38.jar" />
-    </item>
-    <item
         jar="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -30,11 +23,25 @@
         <dex dex="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-e2f0404b8051c47044b22f260d927833ce190938.jar" />
     </item>
     <item
+        jar="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/pre-dexed/debug/classes-8e24203d540ba046fc58d37738d5559bab42fe38.jar" />
+    </item>
+    <item
         jar="/Applications/Android Development Tools/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
         <dex dex="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-1427a77c049f491375220c66b9f26bbb2e42d12e.jar" />
+    </item>
+    <item
+        jar="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/exploded-aar/com.android.support/design/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1821601ddbec5ff125653097812823388700af74">
+        <dex dex="/Users/AlanSeto/Developer/ChinaChef/app/build/intermediates/pre-dexed/debug/classes-711377f00405697c7c972bda7416049e5047a0bf.jar" />
     </item>
 
 </items>
