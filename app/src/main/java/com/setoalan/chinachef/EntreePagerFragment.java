@@ -1,0 +1,81 @@
+package com.setoalan.chinachef;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.List;
+
+import static com.setoalan.chinachef.ChinaChefActivity.sToolbar;
+
+public class EntreePagerFragment extends Fragment {
+
+    public static final String ARG_ENTREE_ID = "entree_id";
+
+    private int entreeId;
+    private List<Entree> mEntrees;
+
+    private ViewPager mViewPager;
+
+    public static EntreePagerFragment newInstance(int entreeId) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_ENTREE_ID, entreeId);
+
+        EntreePagerFragment fragment = new EntreePagerFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+        sToolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
+        sToolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        appCompatActivity.onBackPressed();
+                    }
+                });
+        entreeId = getArguments().getInt(ARG_ENTREE_ID);
+        mEntrees = Menu.get(getActivity()).getEntrees();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_entree_pager, container, false);
+
+        mViewPager = (ViewPager) view.findViewById(R.id.activity_entree_pager_view_pager);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
+            @Override
+            public Fragment getItem(int position) {
+                Entree entree = mEntrees.get(position);
+                return EntreeDetailFragment.newInstance(entree.getId());
+            }
+
+            @Override
+            public int getCount() {
+                return mEntrees.size();
+            }
+        });
+
+        for (int i = 0; i < mEntrees.size(); i++) {
+            if (mEntrees.get(i).getId() == entreeId) {
+                mViewPager.setCurrentItem(i);
+                break;
+            }
+        }
+
+        return view;
+    }
+
+}

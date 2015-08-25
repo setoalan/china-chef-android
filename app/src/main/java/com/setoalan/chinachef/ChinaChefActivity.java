@@ -8,16 +8,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.support.v4.view.GravityCompat;
 import android.view.MenuItem;
 import android.view.View;
 
-public abstract class SingleFragmentActivity extends AppCompatActivity {
+public abstract class ChinaChefActivity extends AppCompatActivity {
 
-    private Toolbar mToolbar;
-    private DrawerLayout mDrawerLayout;
+    public static Toolbar sToolbar;
+    public static DrawerLayout sDrawerLayout;
+    public static ActionBarDrawerToggle sDrawerToggle;
+
     private NavigationView mNavigationView;
-    private ActionBarDrawerToggle mDrawerToggle;
 
     protected abstract Fragment createFragment();
 
@@ -26,12 +26,11 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+        sToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(sToolbar);
 
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.plus, R.string.minus) {
+        sDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        sDrawerToggle = new ActionBarDrawerToggle(this, sDrawerLayout, sToolbar, R.string.plus, R.string.minus) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -42,15 +41,6 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                 super.onDrawerClosed(drawerView);
             }
         };
-        mToolbar.setNavigationIcon(R.mipmap.ic_menu_white_24dp);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerToggle.syncState();
 
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

@@ -1,8 +1,9 @@
 package com.setoalan.chinachef;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.List;
+
+import static com.setoalan.chinachef.ChinaChefActivity.*;
 
 public class EntreeListFragment extends Fragment {
 
@@ -44,6 +47,20 @@ public class EntreeListFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        sToolbar.setNavigationIcon(R.mipmap.ic_menu_white_24dp);
+        sToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        sDrawerLayout.setDrawerListener(sDrawerToggle);
+        sDrawerToggle.syncState();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         Menu.get(getActivity()).destroyMenu();
@@ -53,10 +70,9 @@ public class EntreeListFragment extends Fragment {
         Menu menu = Menu.get(getActivity());
         List<Entree> entrees = menu.getEntrees();
 
-        if (mAdapter == null) {
+        if (mAdapter == null)
             mAdapter = new EntreeAdapter(entrees);
-            mEntreeRecyclerView.setAdapter(mAdapter);
-        }
+        mEntreeRecyclerView.setAdapter(mAdapter);
     }
 
     private class EntreeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -82,8 +98,12 @@ public class EntreeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = EntreePagerActivity.newIntent(getActivity(), mEntree.getId());
-            startActivity(intent);
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            Fragment fragment = EntreePagerFragment.newInstance(mEntree.getId());
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit();
         }
 
     }
