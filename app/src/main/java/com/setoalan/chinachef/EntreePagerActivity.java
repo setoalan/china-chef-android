@@ -32,7 +32,7 @@ public class EntreePagerActivity extends AppCompatActivity {
 
         int entreeId = getIntent().getIntExtra(EXTRA_ENTREE_ID, 0);
 
-        getSupportActionBar().setTitle(R.string.appetizers);
+        // getSupportActionBar().setTitle(R.string.appetizers);
 
         mViewPager = (ViewPager) findViewById(R.id.activity_entree_pager_view_pager);
 
