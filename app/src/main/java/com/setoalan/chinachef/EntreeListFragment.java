@@ -101,6 +101,7 @@ public class EntreeListFragment extends Fragment {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             Fragment fragment = EntreePagerFragment.newInstance(mEntree.getId());
             fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_right, R.anim.abc_fade_out)
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)
                     .commit();

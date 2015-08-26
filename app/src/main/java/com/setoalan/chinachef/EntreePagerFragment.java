@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import java.util.List;
 
 import static com.setoalan.chinachef.ChinaChefActivity.sToolbar;
 
-public class EntreePagerFragment extends Fragment {
+public class EntreePagerFragment extends Fragment implements Toolbar.OnClickListener {
 
     public static final String ARG_ENTREE_ID = "entree_id";
 
@@ -35,15 +36,8 @@ public class EntreePagerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
         sToolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
-        sToolbar.setNavigationOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        appCompatActivity.onBackPressed();
-                    }
-                });
+        sToolbar.setNavigationOnClickListener(this);
         entreeId = getArguments().getInt(ARG_ENTREE_ID);
         mEntrees = Menu.get(getActivity()).getEntrees();
     }
@@ -76,6 +70,17 @@ public class EntreePagerFragment extends Fragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        final AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                .remove(this)
+                .commit();
+        appCompatActivity.onBackPressed();
     }
 
 }
