@@ -36,7 +36,7 @@ public class EntreePagerFragment extends Fragment implements Toolbar.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sToolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
+        sToolbar.setNavigationIcon(R.drawable.ic_action_back);
         sToolbar.setNavigationOnClickListener(this);
         entreeId = getArguments().getInt(ARG_ENTREE_ID);
         mEntrees = Menu.get(getActivity()).getEntrees();

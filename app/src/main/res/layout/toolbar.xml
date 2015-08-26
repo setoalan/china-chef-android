@@ -3,5 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/material_deep_teal_200"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:elevation="4dp" />
+    android:elevation="4dp"
+    android:paddingRight="12dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark" />

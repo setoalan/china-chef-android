@@ -7,4 +7,16 @@
     <string name="zero">0</string>
     <string name="appetizers">Appetizers</string>
     <string name="website_url">smchinachef.com</string>
+    <string name="new_order">New Order</string>
+    <string name="create_order">Create Order</string>
+    <string name="pick_up">Pick-Up</string>
+    <string name="delivery">Delivery</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_phone_number">Customer Phone Number</string>
+    <string name="customer_address">Customer Address</string>
+    <string name="cash">Cash</string>
+    <string name="credit_debit">Credit/Debit</string>
+    <string name="card_number">Card Number</string>
+    <string name="exp_date">Exp Date</string>
+    <string name="special_instructions">Special Instructions</string>
 </resources>
