@@ -12,7 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-public abstract class ChinaChefActivity extends AppCompatActivity {
+import static com.setoalan.chinachef.OrderFragment.*;
+
+public abstract class ChinaChefActivity extends AppCompatActivity implements OnOrderDialogResult {
 
     public static final String DIALOG_ORDER = "DialogOrder";
 
@@ -31,6 +33,7 @@ public abstract class ChinaChefActivity extends AppCompatActivity {
 
         sToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(sToolbar);
+        sToolbar.setSubtitle("Order for: N/A");
 
         sDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         sDrawerToggle = new ActionBarDrawerToggle(this, sDrawerLayout, sToolbar, R.string.plus, R.string.minus) {
@@ -70,6 +73,11 @@ public abstract class ChinaChefActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
+    }
+
+    @Override
+    public void onNameResult(String name) {
+        sToolbar.setSubtitle("Order for: " + name);
     }
 
     @Override

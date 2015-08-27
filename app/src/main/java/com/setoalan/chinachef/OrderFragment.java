@@ -1,5 +1,6 @@
 package com.setoalan.chinachef;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,14 +12,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class OrderFragment extends DialogFragment {
+public class OrderFragment extends DialogFragment implements DialogInterface.OnClickListener {
 
     @Bind(R.id.radio_group_pick_up_delivery) RadioGroup mPickUpDelivery;
     @Bind(R.id.radio_pick_up) RadioButton mPickUp;
+    @Bind(R.id.radio_delivery) RadioButton mDelivery;
     @Bind(R.id.customer_name) EditText mCustomerName;
     @Bind(R.id.customer_phone_number) EditText mCustomerPhoneNumber;
     @Bind(R.id.customer_address) EditText mCustomerAddress;
@@ -28,6 +31,18 @@ public class OrderFragment extends DialogFragment {
     @Bind(R.id.customer_card_number) EditText mCardNumber;
     @Bind(R.id.customer_card_exp_date) EditText mCardExpDate;
     @Bind(R.id.layout_credit_card) LinearLayout mCreditCardLayout;
+
+    private OnOrderDialogResult mOnOrderDialogResult;
+
+    public interface OnOrderDialogResult {
+        void onNameResult(String data);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mOnOrderDialogResult = (OnOrderDialogResult) activity;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -65,18 +80,29 @@ public class OrderFragment extends DialogFragment {
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setTitle(R.string.new_order)
-                .setPositiveButton(R.string.create_order, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Order.newOrder(getActivity(), mCustomerName.getText().toString(),
-                                mCustomerPhoneNumber.getText().toString(),
-                                mPickUp.isChecked(),
-                                mCustomerAddress.getText().toString(),
-                                mCardNumber.getText().toString(),
-                                mCardExpDate.getText().toString());
-                    }
-                })
+                .setPositiveButton(R.string.create_order, this)
                 .create();
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        if (mCustomerName.getText().toString().trim().equals("")) {
+            Toast.makeText(getActivity(), "Name is required.", Toast.LENGTH_SHORT).show();
+        } else if (mCustomerPhoneNumber.getText().toString().trim().equals("")) {
+            Toast.makeText(getActivity(), "Phone number is required.", Toast.LENGTH_SHORT).show();
+        } else if (mDelivery.isChecked() && mCustomerAddress.getText().toString().trim().equals("")) {
+            Toast.makeText(getActivity(), "Address is required.", Toast.LENGTH_SHORT).show();
+        } else if (mCreditDebit.isChecked() && (mCardNumber.getText().toString().trim().equals("") || mCardExpDate.getText().toString().trim().equals(""))) {
+            Toast.makeText(getActivity(), "Card info is requried.", Toast.LENGTH_SHORT).show();
+        } else {
+            Order.newOrder(getActivity(), mCustomerName.getText().toString(),
+                    mCustomerPhoneNumber.getText().toString(),
+                    mPickUp.isChecked(),
+                    mCustomerAddress.getText().toString(),
+                    mCardNumber.getText().toString(),
+                    mCardExpDate.getText().toString());
+            mOnOrderDialogResult.onNameResult(mCustomerName.getText().toString());
+        }
     }
 
 }
