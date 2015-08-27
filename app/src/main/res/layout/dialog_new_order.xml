@@ -5,6 +5,7 @@
     android:padding="16dp">
 
     <RadioGroup
+        android:id="@+id/radio_group_pick_up_delivery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -48,9 +49,11 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/customer_address"
-        android:inputType="textPostalAddress" />
+        android:inputType="textPostalAddress"
+        android:visibility="invisible" />
 
     <RadioGroup
+        android:id="@+id/radio_group_payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -61,21 +64,25 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="@string/cash" />
+            android:text="@string/cash"
+            android:visibility="invisible" />
 
         <RadioButton
             android:id="@+id/radio_credit_debit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/credit_debit" />
+            android:text="@string/credit_debit"
+            android:visibility="invisible" />
 
     </RadioGroup>
 
     <LinearLayout
+        android:id="@+id/layout_credit_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="invisible">
 
         <EditText
             android:id="@+id/customer_card_number"
@@ -96,12 +103,5 @@
             android:inputType="date" />
 
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/customer_special_instructions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/special_instructions" />
 
 </LinearLayout>
