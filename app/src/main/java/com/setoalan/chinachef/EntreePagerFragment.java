@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import static com.setoalan.chinachef.ChinaChefActivity.sToolbar;
 
 public class EntreePagerFragment extends Fragment implements Toolbar.OnClickListener {
@@ -22,7 +25,7 @@ public class EntreePagerFragment extends Fragment implements Toolbar.OnClickList
     private int entreeId;
     private List<Entree> mEntrees;
 
-    private ViewPager mViewPager;
+    @Bind(R.id.activity_entree_pager_view_pager) private ViewPager mViewPager;
 
     public static EntreePagerFragment newInstance(int entreeId) {
         Bundle args = new Bundle();
@@ -46,7 +49,7 @@ public class EntreePagerFragment extends Fragment implements Toolbar.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entree_pager, container, false);
 
-        mViewPager = (ViewPager) view.findViewById(R.id.activity_entree_pager_view_pager);
+        ButterKnife.bind(this, view);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
@@ -70,6 +73,12 @@ public class EntreePagerFragment extends Fragment implements Toolbar.OnClickList
         }
 
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 
     @Override

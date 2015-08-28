@@ -12,17 +12,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 import static com.setoalan.chinachef.OrderFragment.*;
 
 public abstract class ChinaChefActivity extends AppCompatActivity implements OnOrderDialogResult {
 
     public static final String DIALOG_ORDER = "DialogOrder";
 
-    public static Toolbar sToolbar;
-    public static DrawerLayout sDrawerLayout;
+    @Bind(R.id.toolbar) public static Toolbar sToolbar;
+    @Bind(R.id.drawer_layout) public static DrawerLayout sDrawerLayout;
     public static ActionBarDrawerToggle sDrawerToggle;
 
-    private NavigationView mNavigationView;
+    @Bind(R.id.navigation_view) NavigationView mNavigationView;
 
     protected abstract Fragment createFragment();
 
@@ -31,11 +34,11 @@ public abstract class ChinaChefActivity extends AppCompatActivity implements OnO
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
 
-        sToolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
+
         setSupportActionBar(sToolbar);
         sToolbar.setSubtitle("Order for: N/A");
 
-        sDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         sDrawerToggle = new ActionBarDrawerToggle(this, sDrawerLayout, sToolbar, R.string.plus, R.string.minus) {
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -48,7 +51,6 @@ public abstract class ChinaChefActivity extends AppCompatActivity implements OnO
             }
         };
 
-        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {

@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class EntreeDetailFragment extends Fragment {
 
     public static final String ARG_ENTREE_ID = "entree_id";
@@ -17,12 +20,12 @@ public class EntreeDetailFragment extends Fragment {
     private Entree mEntree;
     private int quantity = 0;
 
-    private TextView mNameTextView;
-    private TextView mPriceTextView;
-    private Button mDecreaseButton;
-    private TextView mQuantityTextView;
-    private Button mIncreaseTextView;
-    private TextView mDescriptionTextView;
+    @Bind(R.id.entree_name_text_view) private TextView mNameTextView;
+    @Bind(R.id.entree_price_text_view) private TextView mPriceTextView;
+    @Bind(R.id.decrease_button ) private Button mDecreaseButton;
+    @Bind(R.id.quantity_text_view) private TextView mQuantityTextView;
+    @Bind(R.id.increase_button) private Button mIncreaseTextView;
+    @Bind(R.id.entree_description_text_view) private TextView mDescriptionTextView;
 
     public static EntreeDetailFragment newInstance(int entreeId) {
         Bundle args = new Bundle();
@@ -37,7 +40,6 @@ public class EntreeDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int entreeId = getArguments().getInt(ARG_ENTREE_ID);
-
         mEntree = Menu.get(getActivity()).getEntree(entreeId);
     }
 
@@ -45,13 +47,12 @@ public class EntreeDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entree_detail, container, false);
 
-        mNameTextView = (TextView) view.findViewById(R.id.entree_name_text_view);
+        ButterKnife.bind(this, view);
+
         mNameTextView.setText(mEntree.getName());
 
-        mPriceTextView = (TextView) view.findViewById(R.id.entree_price_text_view);
         mPriceTextView.setText(NumberFormat.getCurrencyInstance().format(mEntree.getPrice()));
 
-        mDecreaseButton = (Button) view.findViewById(R.id.decrease_button);
         mDecreaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,10 +60,9 @@ public class EntreeDetailFragment extends Fragment {
                 mQuantityTextView.setText(String.valueOf(quantity));
             }
         });
-        mQuantityTextView = (TextView) view.findViewById(R.id.quantity_text_view);
+
         mQuantityTextView.setText(String.valueOf(quantity));
 
-        mIncreaseTextView = (Button) view.findViewById(R.id.increase_button);
         mIncreaseTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,10 +70,15 @@ public class EntreeDetailFragment extends Fragment {
             }
         });
 
-        mDescriptionTextView = (TextView) view.findViewById(R.id.entree_description_text_view);
         mDescriptionTextView.setText(mEntree.getDescription());
 
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 
 }

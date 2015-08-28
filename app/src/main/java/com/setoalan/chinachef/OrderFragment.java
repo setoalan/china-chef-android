@@ -19,18 +19,18 @@ import butterknife.ButterKnife;
 
 public class OrderFragment extends DialogFragment implements DialogInterface.OnClickListener {
 
-    @Bind(R.id.radio_group_pick_up_delivery) RadioGroup mPickUpDelivery;
-    @Bind(R.id.radio_pick_up) RadioButton mPickUp;
-    @Bind(R.id.radio_delivery) RadioButton mDelivery;
-    @Bind(R.id.customer_name) EditText mCustomerName;
-    @Bind(R.id.customer_phone_number) EditText mCustomerPhoneNumber;
-    @Bind(R.id.customer_address) EditText mCustomerAddress;
-    @Bind(R.id.radio_group_payment) RadioGroup mPayment;
-    @Bind(R.id.radio_cash) RadioButton mCash;
-    @Bind(R.id.radio_credit_debit) RadioButton mCreditDebit;
-    @Bind(R.id.customer_card_number) EditText mCardNumber;
-    @Bind(R.id.customer_card_exp_date) EditText mCardExpDate;
-    @Bind(R.id.layout_credit_card) LinearLayout mCreditCardLayout;
+    @Bind(R.id.radio_group_pick_up_delivery) private RadioGroup mPickUpDelivery;
+    @Bind(R.id.radio_pick_up) private RadioButton mPickUp;
+    @Bind(R.id.radio_delivery) private RadioButton mDelivery;
+    @Bind(R.id.customer_name) private EditText mCustomerName;
+    @Bind(R.id.customer_phone_number) private EditText mCustomerPhoneNumber;
+    @Bind(R.id.customer_address) private EditText mCustomerAddress;
+    @Bind(R.id.radio_group_payment) private RadioGroup mPayment;
+    @Bind(R.id.radio_cash) private RadioButton mCash;
+    @Bind(R.id.radio_credit_debit) private RadioButton mCreditDebit;
+    @Bind(R.id.customer_card_number) private EditText mCardNumber;
+    @Bind(R.id.customer_card_exp_date) private EditText mCardExpDate;
+    @Bind(R.id.layout_credit_card) private LinearLayout mCreditCardLayout;
 
     private OnOrderDialogResult mOnOrderDialogResult;
 
@@ -82,6 +82,12 @@ public class OrderFragment extends DialogFragment implements DialogInterface.OnC
                 .setTitle(R.string.new_order)
                 .setPositiveButton(R.string.create_order, this)
                 .create();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 
     @Override
