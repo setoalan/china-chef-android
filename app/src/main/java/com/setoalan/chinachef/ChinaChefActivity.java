@@ -21,8 +21,8 @@ public abstract class ChinaChefActivity extends AppCompatActivity implements OnO
 
     public static final String DIALOG_ORDER = "DialogOrder";
 
-    @Bind(R.id.toolbar) public static Toolbar sToolbar;
-    @Bind(R.id.drawer_layout) public static DrawerLayout sDrawerLayout;
+    @Bind(R.id.toolbar) Toolbar sToolbar;
+    @Bind(R.id.drawer_layout) DrawerLayout sDrawerLayout;
     public static ActionBarDrawerToggle sDrawerToggle;
 
     @Bind(R.id.navigation_view) NavigationView mNavigationView;

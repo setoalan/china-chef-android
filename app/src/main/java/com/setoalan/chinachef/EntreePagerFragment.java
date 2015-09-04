@@ -16,8 +16,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static com.setoalan.chinachef.ChinaChefActivity.sToolbar;
-
 public class EntreePagerFragment extends Fragment implements Toolbar.OnClickListener {
 
     public static final String ARG_ENTREE_ID = "entree_id";
@@ -25,7 +23,7 @@ public class EntreePagerFragment extends Fragment implements Toolbar.OnClickList
     private int entreeId;
     private List<Entree> mEntrees;
 
-    @Bind(R.id.activity_entree_pager_view_pager) private ViewPager mViewPager;
+    @Bind(R.id.fragment_entree_pager_view_pager)  ViewPager mViewPager;
 
     public static EntreePagerFragment newInstance(int entreeId) {
         Bundle args = new Bundle();
@@ -39,8 +37,8 @@ public class EntreePagerFragment extends Fragment implements Toolbar.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sToolbar.setNavigationIcon(R.drawable.ic_action_back);
-        sToolbar.setNavigationOnClickListener(this);
+        //sToolbar.setNavigationIcon(R.drawable.ic_action_back);
+        //sToolbar.setNavigationOnClickListener(this);
         entreeId = getArguments().getInt(ARG_ENTREE_ID);
         mEntrees = Menu.get(getActivity()).getEntrees();
     }

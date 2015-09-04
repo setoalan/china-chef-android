@@ -3,7 +3,6 @@ package com.setoalan.chinachef;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,13 +22,15 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static com.setoalan.chinachef.ChinaChefActivity.*;
+import static com.setoalan.chinachef.ChinaChefActivity.sDrawerToggle;
 
 public class EntreeListFragment extends Fragment {
 
+    public static final String DIALOG_MENU = "DialogMenu";
+
     private EntreeAdapter mAdapter;
 
-    @Bind(R.id.entree_recycler_view) private RecyclerView mEntreeRecyclerView;
+    @Bind(R.id.entree_recycler_view) RecyclerView mEntreeRecyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,14 +54,14 @@ public class EntreeListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        sToolbar.setNavigationIcon(R.mipmap.ic_menu_white_24dp);
+        /*sToolbar.setNavigationIcon(R.mipmap.ic_menu_white_24dp);
         sToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
-        sDrawerLayout.setDrawerListener(sDrawerToggle);
+        sDrawerLayout.setDrawerListener(sDrawerToggle);*/
         sDrawerToggle.syncState();
     }
 
@@ -80,21 +81,21 @@ public class EntreeListFragment extends Fragment {
         mEntreeRecyclerView.setAdapter(mAdapter);
     }
 
-    private class EntreeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class EntreeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private Entree mEntree;
 
-        @Bind(R.id.list_item_entree_name_text_view) private TextView mNameTextView;
-        @Bind(R.id.list_item_entree_price_text_view) private TextView mPriceTextView;
+        @Bind(R.id.list_item_entree_name_text_view) TextView mNameTextView;
+        @Bind(R.id.list_item_entree_price_text_view) TextView mPriceTextView;
 
         public EntreeHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            ButterKnife.bind(itemView);
+            ButterKnife.bind(this, itemView);
         }
 
-        public void bindCrime(Entree entree) {
+        public void bindEntree(Entree entree) {
             mEntree = entree;
             mNameTextView.setText(mEntree.getName());
             mPriceTextView.setText(NumberFormat.getCurrencyInstance().format(mEntree.getPrice()));
@@ -131,7 +132,7 @@ public class EntreeListFragment extends Fragment {
         @Override
         public void onBindViewHolder(EntreeHolder entreeHolder, int position) {
             Entree entree = mEntrees.get(position);
-            entreeHolder.bindCrime(entree);
+            entreeHolder.bindEntree(entree);
         }
 
         @Override

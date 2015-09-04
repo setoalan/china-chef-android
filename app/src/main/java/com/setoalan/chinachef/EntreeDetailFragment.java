@@ -20,12 +20,12 @@ public class EntreeDetailFragment extends Fragment {
     private Entree mEntree;
     private int quantity = 0;
 
-    @Bind(R.id.entree_name_text_view) private TextView mNameTextView;
-    @Bind(R.id.entree_price_text_view) private TextView mPriceTextView;
-    @Bind(R.id.decrease_button ) private Button mDecreaseButton;
-    @Bind(R.id.quantity_text_view) private TextView mQuantityTextView;
-    @Bind(R.id.increase_button) private Button mIncreaseTextView;
-    @Bind(R.id.entree_description_text_view) private TextView mDescriptionTextView;
+    @Bind(R.id.entree_name_text_view) TextView mNameTextView;
+    @Bind(R.id.entree_price_text_view) TextView mPriceTextView;
+    @Bind(R.id.decrease_button) Button mDecreaseButton;
+    @Bind(R.id.quantity_text_view) TextView mQuantityTextView;
+    @Bind(R.id.increase_button) Button mIncreaseTextView;
+    @Bind(R.id.entree_description_text_view) TextView mDescriptionTextView;
 
     public static EntreeDetailFragment newInstance(int entreeId) {
         Bundle args = new Bundle();
