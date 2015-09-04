@@ -1,10 +1,13 @@
 package com.setoalan.chinachef;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,14 +16,13 @@ import java.text.NumberFormat;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class EntreeDetailFragment extends Fragment {
+public class EntreeDetailFragment extends DialogFragment {
 
     public static final String ARG_ENTREE_ID = "entree_id";
 
     private Entree mEntree;
     private int quantity = 0;
 
-    @Bind(R.id.entree_name_text_view) TextView mNameTextView;
     @Bind(R.id.entree_price_text_view) TextView mPriceTextView;
     @Bind(R.id.decrease_button) Button mDecreaseButton;
     @Bind(R.id.quantity_text_view) TextView mQuantityTextView;
@@ -44,12 +46,10 @@ public class EntreeDetailFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_entree_detail, container, false);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_entree_detail, null);
 
         ButterKnife.bind(this, view);
-
-        mNameTextView.setText(mEntree.getName());
 
         mPriceTextView.setText(NumberFormat.getCurrencyInstance().format(mEntree.getPrice()));
 
@@ -72,7 +72,16 @@ public class EntreeDetailFragment extends Fragment {
 
         mDescriptionTextView.setText(mEntree.getDescription());
 
-        return view;
+        return new AlertDialog.Builder(getActivity())
+                .setView(view)
+                .setTitle(mEntree.getName())
+                .setPositiveButton(R.string.add_to_order, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.i("TAG", "TAG");
+                    }
+                })
+                .create();
     }
 
     @Override

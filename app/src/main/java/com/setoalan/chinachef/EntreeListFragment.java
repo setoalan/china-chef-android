@@ -26,7 +26,7 @@ import static com.setoalan.chinachef.ChinaChefActivity.sDrawerToggle;
 
 public class EntreeListFragment extends Fragment {
 
-    public static final String DIALOG_MENU = "DialogMenu";
+    public static final String DIALOG_ENTREE = "EntreeOrder";
 
     private EntreeAdapter mAdapter;
 
@@ -103,13 +103,9 @@ public class EntreeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            Fragment fragment = EntreePagerFragment.newInstance(mEntree.getId());
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(R.anim.slide_in_right, R.anim.abc_fade_out)
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
-                    .commit();
+            FragmentManager manager = getActivity().getSupportFragmentManager();
+            EntreeDetailFragment entreeDetailFragment = EntreeDetailFragment.newInstance(mEntree.getId());
+            entreeDetailFragment.show(manager, DIALOG_ENTREE);
         }
 
     }
