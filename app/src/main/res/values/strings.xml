@@ -19,4 +19,6 @@
     <string name="card_number">Card Number</string>
     <string name="exp_date">Exp Date</string>
     <string name="special_instructions">Special Instructions</string>
+    <string name="add_to_order">Add to Order</string>
+    <string name="Price">Price</string>
 </resources>
