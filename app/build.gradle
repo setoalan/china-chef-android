@@ -20,6 +20,9 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
 }
 
 dependencies {
@@ -27,5 +30,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.android.support:design:22.2.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'org.roboguice:roboguice:3.0.1'
+    compile 'org.roboguice:roboblender:3.0.1'
 }

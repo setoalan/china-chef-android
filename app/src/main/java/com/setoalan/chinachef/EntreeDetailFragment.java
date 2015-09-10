@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import roboguice.inject.InjectView;
 
 public class EntreeDetailFragment extends DialogFragment {
 
@@ -23,11 +22,11 @@ public class EntreeDetailFragment extends DialogFragment {
     private Entree mEntree;
     private int quantity = 0;
 
-    @Bind(R.id.entree_price_text_view) TextView mPriceTextView;
-    @Bind(R.id.decrease_button) Button mDecreaseButton;
-    @Bind(R.id.quantity_text_view) TextView mQuantityTextView;
-    @Bind(R.id.increase_button) Button mIncreaseTextView;
-    @Bind(R.id.entree_description_text_view) TextView mDescriptionTextView;
+    @InjectView(R.id.entree_price_text_view) private TextView mPriceTextView;
+    @InjectView(R.id.decrease_button) private Button mDecreaseButton;
+    @InjectView(R.id.quantity_text_view) private TextView mQuantityTextView;
+    @InjectView(R.id.increase_button) private Button mIncreaseTextView;
+    @InjectView(R.id.entree_description_text_view) private TextView mDescriptionTextView;
 
     public static EntreeDetailFragment newInstance(int entreeId) {
         Bundle args = new Bundle();
@@ -48,8 +47,6 @@ public class EntreeDetailFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_entree_detail, null);
-
-        ButterKnife.bind(this, view);
 
         mPriceTextView.setText(NumberFormat.getCurrencyInstance().format(mEntree.getPrice()));
 
@@ -82,12 +79,6 @@ public class EntreeDetailFragment extends DialogFragment {
                     }
                 })
                 .create();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
     }
 
 }
