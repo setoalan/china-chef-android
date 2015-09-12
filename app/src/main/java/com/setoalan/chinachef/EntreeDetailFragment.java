@@ -21,7 +21,7 @@ public class EntreeDetailFragment extends DialogFragment {
     public static final String ARG_ENTREE_ID = "entree_id";
 
     private Entree mEntree;
-    private int quantity = 0;
+    private int quantity = 1;
 
     @Bind(R.id.entree_price_text_view) TextView mPriceTextView;
     @Bind(R.id.decrease_button) Button mDecreaseButton;
@@ -56,7 +56,7 @@ public class EntreeDetailFragment extends DialogFragment {
         mDecreaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quantity != 0) quantity--;
+                if (quantity != 1) quantity--;
                 mQuantityTextView.setText(String.valueOf(quantity));
             }
         });
@@ -70,7 +70,8 @@ public class EntreeDetailFragment extends DialogFragment {
             }
         });
 
-        mDescriptionTextView.setText(mEntree.getDescription());
+        if (!mEntree.getDescription().equals(""))
+            mDescriptionTextView.setText(mEntree.getDescription());
 
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
@@ -81,6 +82,7 @@ public class EntreeDetailFragment extends DialogFragment {
                         Log.i("TAG", "TAG");
                     }
                 })
+                .setNegativeButton(R.string.cancel, null)
                 .create();
     }
 

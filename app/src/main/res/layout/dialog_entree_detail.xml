@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -51,7 +52,7 @@
             android:gravity="center"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="@string/zero" />
+            android:text="@string/one" />
 
         <Button
             android:id="@+id/decrease_button"
@@ -76,6 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:paddingRight="8dp"
         android:text="@string/spiciness"
         android:textSize="16sp" />
