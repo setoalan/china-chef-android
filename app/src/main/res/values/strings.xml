@@ -27,4 +27,5 @@
     <string name="hot">Hot</string>
     <string name="spiciness">Spiciness</string>
     <string name="customize">Customize</string>
+    <string name="no_description">No Description</string>
 </resources>

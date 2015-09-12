@@ -75,6 +75,8 @@
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:paddingRight="8dp"
         android:text="@string/spiciness"
         android:textSize="16sp" />
 
@@ -130,8 +132,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
+        android:text="@string/no_description"
         android:textSize="12sp"
-        android:textStyle="italic"
-        tools:text="Description" />
+        android:textStyle="italic" />
 
 </LinearLayout>

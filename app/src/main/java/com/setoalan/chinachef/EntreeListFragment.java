@@ -19,7 +19,8 @@ import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.List;
 
-import roboguice.inject.InjectView;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import static com.setoalan.chinachef.ChinaChefActivity.sDrawerToggle;
 
@@ -29,7 +30,7 @@ public class EntreeListFragment extends Fragment {
 
     private EntreeAdapter mAdapter;
 
-    @InjectView(R.id.entree_recycler_view) private RecyclerView mEntreeRecyclerView;
+    @Bind(R.id.entree_recycler_view) RecyclerView mEntreeRecyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class EntreeListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_entree_list, container, false);
+
+        ButterKnife.bind(this, view);
 
         mEntreeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -65,6 +68,7 @@ public class EntreeListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        ButterKnife.unbind(this);
         Menu.get(getActivity()).destroyMenu();
     }
 
@@ -81,12 +85,14 @@ public class EntreeListFragment extends Fragment {
 
         private Entree mEntree;
 
-        @InjectView(R.id.list_item_entree_name_text_view) private TextView mNameTextView;
-        @InjectView(R.id.list_item_entree_price_text_view) private TextView mPriceTextView;
+        @Bind(R.id.list_item_entree_name_text_view) TextView mNameTextView;
+        @Bind(R.id.list_item_entree_price_text_view) TextView mPriceTextView;
 
         public EntreeHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+
+            ButterKnife.bind(this, itemView);
         }
 
         public void bindEntree(Entree entree) {

@@ -14,22 +14,23 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import roboguice.inject.InjectView;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class OrderFragment extends DialogFragment implements DialogInterface.OnClickListener {
 
-    @InjectView(R.id.radio_group_pick_up_delivery) private RadioGroup mPickUpDelivery;
-    @InjectView(R.id.radio_pick_up) private RadioButton mPickUp;
-    @InjectView(R.id.radio_delivery) private RadioButton mDelivery;
-    @InjectView(R.id.customer_name) private EditText mCustomerName;
-    @InjectView(R.id.customer_phone_number) private EditText mCustomerPhoneNumber;
-    @InjectView(R.id.customer_address) private EditText mCustomerAddress;
-    @InjectView(R.id.radio_group_payment) private RadioGroup mPayment;
-    @InjectView(R.id.radio_cash) private RadioButton mCash;
-    @InjectView(R.id.radio_credit_debit) private RadioButton mCreditDebit;
-    @InjectView(R.id.customer_card_number) private EditText mCardNumber;
-    @InjectView(R.id.customer_card_exp_date) private EditText mCardExpDate;
-    @InjectView(R.id.layout_credit_card) private LinearLayout mCreditCardLayout;
+    @Bind(R.id.radio_group_pick_up_delivery) RadioGroup mPickUpDelivery;
+    @Bind(R.id.radio_pick_up) RadioButton mPickUp;
+    @Bind(R.id.radio_delivery) RadioButton mDelivery;
+    @Bind(R.id.customer_name) EditText mCustomerName;
+    @Bind(R.id.customer_phone_number) EditText mCustomerPhoneNumber;
+    @Bind(R.id.customer_address) EditText mCustomerAddress;
+    @Bind(R.id.radio_group_payment) RadioGroup mPayment;
+    @Bind(R.id.radio_cash) RadioButton mCash;
+    @Bind(R.id.radio_credit_debit) RadioButton mCreditDebit;
+    @Bind(R.id.customer_card_number) EditText mCardNumber;
+    @Bind(R.id.customer_card_exp_date) EditText mCardExpDate;
+    @Bind(R.id.layout_credit_card) LinearLayout mCreditCardLayout;
 
     private OnOrderDialogResult mOnOrderDialogResult;
 
@@ -46,6 +47,8 @@ public class OrderFragment extends DialogFragment implements DialogInterface.OnC
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_new_order, null);
+
+        ButterKnife.bind(this, view);
 
         mPickUpDelivery.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -79,6 +82,12 @@ public class OrderFragment extends DialogFragment implements DialogInterface.OnC
                 .setTitle(R.string.new_order)
                 .setPositiveButton(R.string.create_order, this)
                 .create();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 
     @Override

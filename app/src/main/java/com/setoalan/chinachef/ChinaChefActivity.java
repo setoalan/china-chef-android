@@ -12,7 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import roboguice.inject.InjectView;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import static com.setoalan.chinachef.OrderFragment.OnOrderDialogResult;
 
@@ -20,11 +21,11 @@ public abstract class ChinaChefActivity extends AppCompatActivity implements OnO
 
     public static final String DIALOG_ORDER = "DialogOrder";
 
-    @InjectView(R.id.toolbar) private Toolbar sToolbar;
-    @InjectView(R.id.drawer_layout) private DrawerLayout sDrawerLayout;
     public static ActionBarDrawerToggle sDrawerToggle;
 
-    @InjectView(R.id.navigation_view) private NavigationView mNavigationView;
+    @Bind(R.id.toolbar) Toolbar sToolbar;
+    @Bind(R.id.drawer_layout) DrawerLayout sDrawerLayout;
+    @Bind(R.id.navigation_view) NavigationView mNavigationView;
 
     protected abstract Fragment createFragment();
 
@@ -32,6 +33,9 @@ public abstract class ChinaChefActivity extends AppCompatActivity implements OnO
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
+
+        ButterKnife.bind(this);
+
         setSupportActionBar(sToolbar);
         sToolbar.setSubtitle("Order for: N/A");
 
@@ -71,6 +75,12 @@ public abstract class ChinaChefActivity extends AppCompatActivity implements OnO
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 
     @Override
